@@ -1,23 +1,28 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
-}
+import { Router, Scene } from 'react-native-router-flux';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import TopRepos from './components/top-repos';
+import DetailedRepo from './components/detailed-repo';
+
+const App = () => {
+    return (
+        <Router>
+          <Scene key="root">
+            <Scene key="TopRepos"
+                   component={TopRepos}
+                   title="Top repos"
+                   initial
+            />
+            <Scene
+                key="DetailedRepo"
+                component={DetailedRepo}
+                title="Detailed repo"
+            />
+          </Scene>
+        </Router>
+    );
+};
+
+export default App;
