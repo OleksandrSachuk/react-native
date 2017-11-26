@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "global": "^4.3.1",
-    "react-native": "^0.39.2",
-    "react-native-cli": "^2.0.0"
-  }
-}
