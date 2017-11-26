@@ -1,33 +1,21 @@
 import React  from 'react';
-import {Actions} from 'react-native-router-flux';
-import {connect} from 'react-redux';
-import {fetchTopRepos} from '../actions/actions'
-
+import { Actions } from 'react-native-router-flux';
 import {
-    StyleSheet,
-    View,
-    Text,
-    FlatList
+  StyleSheet,
+  View,
+  Text
 } from 'react-native'
-import { ListItem, Subheader, Toolbar } from '../react-native-material-ui/src';
 
-class TopRepos extends React.PureComponent {
-
-    componentDidMount() {
-this.props.fetchTopRepos();
-    }
-
-    render() {
-        return (
-            <View style={styles.page}>
-                <FlatList
-                    data={this.props.topRepos.repos}
-                    renderItem={({item}) => <Text onPress={() => Actions.DetailedRepo()}>{item.name}</Text>}
-                />
-            </View>
-        )
-    }
-}
+const TopRepos = () => (
+  <View style={styles.page}>
+    <Text
+        style={styles.text}
+        onPress={() => Actions.DetailedRepo()}
+    >
+      DetailedRepo
+    </Text>
+  </View>
+);
 
 const styles = StyleSheet.create({
     page: {
@@ -43,14 +31,4 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = state => {
-    return {
-        topRepos: state.topRepos
-    };
-};
-
-const mapDispatchToProps = {
-    fetchTopRepos
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TopRepos);
+export default TopRepos;
