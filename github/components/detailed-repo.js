@@ -1,17 +1,23 @@
 import React  from 'react';
-
 import {
   StyleSheet,
   View,
   Text
-} from 'react-native'
+} from 'react-native';
+import { ListItem, Subheader, Toolbar } from 'react-native-material-ui';
 
 const DetailedRepo = () => (
-  <View style={styles.page}>
-    <Text style={styles.text}>
-      DetailedRepo
-    </Text>
-  </View>
+    <ListItem
+        divider
+        leftElement="person"
+        centerElement={{
+            primaryText: 'Ali Connors',
+            secondaryText: 'Brunch this weekend?',
+            tertiaryText: 'Pellentesque commodo ultrices diam. Praesent in ipsum.',
+        }}
+        onPress={() => {}}
+    />
+    // <Subheader text="One line with icon" />
 );
 
 const styles = StyleSheet.create({
