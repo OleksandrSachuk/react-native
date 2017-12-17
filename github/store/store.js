@@ -21,14 +21,17 @@ const sagaMiddleware = createSagaMiddleware(/* {sagaMonitor} */);
 //
 //
 
-const enhancer = compose(
-    applyMiddleware(sagaMiddleware,logger),
-    devTools({
-        name: Platform.OS,
-        hostname: 'localhost',
-        port: 19009
-    }))
-
-export const store = createStore(rootReducer, enhancer);
+// const enhancer = compose(
+//     applyMiddleware(sagaMiddleware,logger),
+//     devTools({
+//         name: Platform.OS,
+//         hostname: 'localhost',
+//         port: 19009
+//     }))
+//
+// export const store = createStore(rootReducer, enhancer);
+export const store = createStore(rootReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    applyMiddleware(sagaMiddleware, logger));
 
 sagaMiddleware.run(topReposSaga)

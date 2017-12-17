@@ -1,21 +1,66 @@
 import React  from 'react';
-import { Actions } from 'react-native-router-flux';
-import {
-  StyleSheet,
-  View,
-  Text
-} from 'react-native'
+import {Actions} from 'react-native-router-flux';
+import {connect} from 'react-redux';
+import {fetchTopRepos} from '../actions/actions'
 
-const TopRepos = () => (
-  <View style={styles.page}>
-    <Text
-        style={styles.text}
-        onPress={() => Actions.DetailedRepo()}
-    >
-      DetailedRepo
-    </Text>
-  </View>
-);
+import {
+    StyleSheet,
+    ScrollView,
+    View,
+    Text,
+    FlatList
+} from 'react-native'
+import {ListItem, Subheader, Toolbar} from 'react-native-material-ui';
+
+import {COLOR, ThemeProvider} from 'react-native-material-ui';
+
+const uiTheme = {
+    palette: {
+        primaryColor: COLOR.green500,
+    },
+    toolbar: {
+        container: {
+            height: 50,
+        },
+    },
+};
+
+class TopRepos extends React.PureComponent {
+
+    componentDidMount() {
+        this.props.fetchTopRepos();
+    }
+
+    render() {
+        return (
+            <ThemeProvider uiTheme={uiTheme}>
+                <ScrollView>
+                    <Subheader text="One line"/>
+                    <ListItem
+                        divider
+                        centerElement="Center element as a text"
+                        onPress={() => {
+                        }}
+                    />
+                </ScrollView>
+            </ThemeProvider>
+
+        )
+    }
+}
+
+{/*<View style={styles.page}>*/
+}
+{/*<FlatList*/
+}
+{/*data={this.props.topRepos.repos}*/
+}
+{/*renderItem={({item}) => <Text onPress={() => Actions.DetailedRepo()}>{item.name}</Text>}*/
+}
+{/*/>*/
+}
+{/*</View>*/
+}
 
 const styles = StyleSheet.create({
     page: {
@@ -31,4 +76,14 @@ const styles = StyleSheet.create({
     }
 });
 
-export default TopRepos;
+const mapStateToProps = state => {
+    return {
+        topRepos: state.topRepos
+    };
+};
+
+const mapDispatchToProps = {
+    fetchTopRepos
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopRepos);
