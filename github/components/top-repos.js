@@ -31,17 +31,44 @@ class TopRepos extends React.PureComponent {
         this.props.fetchTopRepos();
     }
 
+    renderList = () => {
+        const { repos } = this.props.topRepos;
+        if (repos) {
+             return repos.map(item => {
+                 <ListItem
+                     divider
+                     centerElement="Center element as a text"
+                     onPress={() => {
+                     }}
+                 />
+             })
+        } else {
+            return null
+        }
+    };
+
+
     render() {
+        let list;
+        const { repos } = this.props.topRepos;
+        console.log('repos', repos);
+        if (repos) {
+            list = repos.map(item => {
+                <ListItem
+                    divider
+                    centerElement="Center element as a text"
+                    onPress={() => {
+                    }}
+                />
+            })
+        } else {
+            list = null;
+        }
+
         return (
             <ThemeProvider uiTheme={uiTheme}>
                 <ScrollView>
-                    <Subheader text="One line"/>
-                    <ListItem
-                        divider
-                        centerElement="Center element as a text"
-                        onPress={() => {
-                        }}
-                    />
+                    {list}
                 </ScrollView>
             </ThemeProvider>
 
